@@ -1,7 +1,7 @@
 # Prismagram iOS & Android App
 
 Screens:
-- [ ] Home
+- [x] Home
 - [ ] Search
 - [ ] Upload
 - [ ] Notifications
