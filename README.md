@@ -2,7 +2,7 @@
 
 Screens:
 - [x] Home
-- [ ] Search
+- [x] Search
 - [ ] Upload
 - [ ] Notifications
 - [ ] Profile
