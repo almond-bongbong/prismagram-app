@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 function AuthNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AuthHome">
+      <Stack.Navigator initialRouteName="AuthHome" headerMode="none">
         <Stack.Screen name="AuthHome" component={AuthHome} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Login" component={Login} />

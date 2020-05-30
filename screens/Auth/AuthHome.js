@@ -18,7 +18,7 @@ export default ({ navigation }) => (
       <Text>Go to Login</Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-      <Text>Go to Signup</Text>
+      <Text>Go to SignUp</Text>
     </TouchableOpacity>
   </Container>
 );
