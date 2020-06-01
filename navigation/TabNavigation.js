@@ -11,7 +11,8 @@ const Tab = createBottomTabNavigator();
 function Add({ navigation }) {
   useEffect(() => {
     return navigation.addListener('tabPress', (e) => {
-      console.log('hello');
+      e.preventDefault();
+      navigation.navigate('PhotoNavigation');
     });
   }, [navigation]);
   return <View />;
