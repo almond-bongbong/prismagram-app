@@ -1,22 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
-import Notifications from '../screens/Notifications';
-import Profile from '../screens/Profile';
-import Search from '../screens/Search';
+import Home from '../screens/Tabs/Home';
+import Notifications from '../screens/Tabs/Notifications';
+import Profile from '../screens/Tabs/Profile';
+import Search from '../screens/Tabs/Search';
+import { createStackNavigator } from '@react-navigation/stack';
+import MessagesLink from '../components/layouts/MessagesLink';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
-function Add({ navigation }) {
-  useEffect(() => {
-    return navigation.addListener('tabPress', (e) => {
-      e.preventDefault();
-      navigation.navigate('PhotoNavigation');
-    });
-  }, [navigation]);
-  return <View />;
-}
+const stackFactory = ({ route }) => {
+  const { InitialRoute, customConfig } = route.params;
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name={route.name}
+        component={InitialRoute}
+        options={customConfig}
+      />
+    </Stack.Navigator>
+  );
+};
 
 function TabNavigation() {
   return (
@@ -25,11 +31,48 @@ function TabNavigation() {
         showLabel: true,
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Notifications" component={Notifications} />
-      <Tab.Screen name="Add" component={Add} />
-      <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen
+        name="Home"
+        component={stackFactory}
+        initialParams={{
+          InitialRoute: Home,
+          customConfig: {
+            title: 'Hello',
+            headerRight: () => <MessagesLink />,
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={stackFactory}
+        initialParams={{
+          InitialRoute: Search,
+        }}
+      />
+      <Tab.Screen
+        name="Add"
+        component={View}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            navigation.navigate('PhotoNavigation');
+          },
+        })}
+      />
+      <Tab.Screen
+        name="Notifications"
+        component={stackFactory}
+        initialParams={{
+          InitialRoute: Notifications,
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={stackFactory}
+        initialParams={{
+          InitialRoute: Profile,
+        }}
+      />
     </Tab.Navigator>
   );
 }
