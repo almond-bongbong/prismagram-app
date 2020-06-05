@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
+import AuthButton from '../../components/AuthButton';
 
 const Container = styled(View)`
   justify-content: center;
@@ -8,17 +9,33 @@ const Container = styled(View)`
   flex: 1;
 `;
 
-const Text = styled.Text``;
+const Image = styled.Image`
+  width: 140px;
+  height: 60px;
+  margin-bottom: 30px;
+`;
+
+const Touchable = styled.TouchableOpacity``;
+
+const LoginLink = styled.View`
+  margin-top: 20px;
+`;
+
+const LoginLinkText = styled.Text`
+  color: ${({ theme }) => theme.blueColor};
+`;
 
 export default ({ navigation }) => (
   <Container>
-    <Text>Auth Home</Text>
-    <Text>hello</Text>
-    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-      <Text>Go to Login</Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-      <Text>Go to SignUp</Text>
-    </TouchableOpacity>
+    <Image resizeMode="contain" source={require('../../assets/logo.png')} />
+    <AuthButton
+      text="Create New Account"
+      onPress={() => navigation.navigate('SignUp')}
+    />
+    <Touchable onPress={() => navigation.navigate('Login')}>
+      <LoginLink>
+        <LoginLinkText>Login</LoginLinkText>
+      </LoginLink>
+    </Touchable>
   </Container>
 );
