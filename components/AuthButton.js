@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import constants from '../constants';
 
 const Touchable = styled.TouchableOpacity``;
 
@@ -8,7 +9,7 @@ const Container = styled.View`
   background-color: ${({ theme }) => theme.blueColor};
   padding: 10px;
   border-radius: 4px;
-  width: 180px;
+  width: ${constants.width / 2};
 `;
 
 const Text = styled.Text`
