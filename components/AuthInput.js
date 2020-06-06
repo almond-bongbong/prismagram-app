@@ -8,10 +8,10 @@ const Container = styled.View`
 `;
 
 const TextInput = styled.TextInput`
-  width: ${constants.width / 2};
+  width: ${constants.width / 1.7}px;
   padding: 10px;
   background-color: ${({ theme }) => theme.greyColor};
-  border: 2px solid ${({ theme }) => theme.darkGreyColor};
+  border: 1px solid ${({ theme }) => theme.darkGreyColor};
   border-radius: 4px;
 `;
 
@@ -23,7 +23,7 @@ function AuthInput({
   autoCapitalize,
   returnKeyType,
   onSubmitEditing,
-                     autoCorrect,
+  autoCorrect,
 }) {
   return (
     <Container>

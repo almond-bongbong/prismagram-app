@@ -19,6 +19,8 @@ export default function App() {
   const [client, setClient] = useState(null);
 
   const preLoad = useCallback(async () => {
+    await AsyncStorage.clear();
+
     try {
       await Font.loadAsync({
         ...Ionicons.font,

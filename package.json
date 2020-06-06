@@ -20,10 +20,14 @@
     "apollo-cache-persist": "^0.1.1",
     "expo": "~37.0.3",
     "expo-asset": "^8.1.5",
+    "expo-constants": "^9.0.0",
+    "expo-facebook": "^8.1.0",
     "expo-font": "^8.1.1",
+    "expo-google-app-auth": "^8.1.0",
     "graphql": "^15.0.0",
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
+    "query-string": "^6.13.0",
     "react": "~16.9.0",
     "react-apollo-hooks": "^0.5.0",
     "react-dom": "~16.9.0",
@@ -39,6 +43,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "babel-plugin-inline-dotenv": "^1.5.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "babel-preset-expo": "~8.1.0"
   },
   "private": true
