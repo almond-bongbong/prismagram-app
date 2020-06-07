@@ -102,7 +102,6 @@ function SignUp({ navigation, route }) {
       });
 
       if (result.type === 'success') {
-        console.log(result);
         const data = result.user;
         setName(data.name || '');
         setEmail(data.email || '');

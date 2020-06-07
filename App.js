@@ -14,13 +14,11 @@ import apolloClientOptions from './apollo';
 import NavController from './components/NavController';
 import { AuthProvider } from './AuthContext';
 
-export default function App() {
+function App() {
   const [loaded, setLoaded] = useState(false);
   const [client, setClient] = useState(null);
 
   const preLoad = useCallback(async () => {
-    await AsyncStorage.clear();
-
     try {
       await Font.loadAsync({
         ...Ionicons.font,
@@ -33,6 +31,14 @@ export default function App() {
       });
       const client = new ApolloClient({
         cache,
+        request: async (operation) => {
+          const token = await AsyncStorage.getItem('jwt');
+          operation.setContext({
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        },
         ...apolloClientOptions,
       });
       setLoaded(true);
@@ -58,3 +64,5 @@ export default function App() {
     <AppLoading />
   );
 }
+
+export default App;
