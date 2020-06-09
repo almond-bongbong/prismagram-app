@@ -4,11 +4,9 @@ import { gql } from 'apollo-boost';
 import { RefreshControl, ScrollView } from 'react-native';
 import { useQuery } from 'react-apollo-hooks';
 import Loader from '../../components/common/Loader';
+import Post from '../../components/post/Post';
 
-const View = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+const Container = styled.ScrollView`
   background-color: #fff;
 `;
 
@@ -61,13 +59,17 @@ function Home() {
   };
 
   return (
-    <ScrollView
+    <Container
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={refresh} />
       }
     >
-      {loading ? <Loader /> : <Text>hello</Text>}
-    </ScrollView>
+      {loading ? (
+        <Loader />
+      ) : (
+        data?.seeFeed?.map((post) => <Post key={post.id} {...post} />)
+      )}
+    </Container>
   );
 }
 
