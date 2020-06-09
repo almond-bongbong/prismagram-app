@@ -45,7 +45,6 @@ const FEED_QUERY = gql`
 function Home() {
   const [refreshing, setRefreshing] = useState(false);
   const { loading, data, refetch } = useQuery(FEED_QUERY);
-  console.log(loading, data);
 
   const refresh = async () => {
     try {
