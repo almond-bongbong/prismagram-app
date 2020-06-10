@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MessagesLink from '../components/layouts/MessagesLink';
 import NavIcon from './NavIcon';
 import { stackStyles } from './config';
+import SearchBar from '../components/common/SearchBar';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -35,6 +36,7 @@ function TabNavigation() {
   const isIOS = Platform.OS === 'ios';
   return (
     <Tab.Navigator
+      initialRouteName="Search"
       tabBarOptions={{
         showLabel: false,
         style: {
