@@ -14,9 +14,13 @@ const Text = styled.Text``;
 function Search({ navigation }) {
   const [keyword, setKeyword] = useState('');
 
+  const handleSubmit = () => {
+
+  };
+
   navigation.setOptions({
     headerTitle: () => (
-      <SearchBar onSubmit={(_) => _} onChange={setKeyword} value={keyword} />
+      <SearchBar onSubmit={handleSubmit} onChange={setKeyword} value={keyword} />
     ),
   });
 
