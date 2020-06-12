@@ -5,6 +5,7 @@ import { RefreshControl, ScrollView } from 'react-native';
 import { useQuery } from 'react-apollo-hooks';
 import Loader from '../../components/common/Loader';
 import Post from '../../components/post/Post';
+import { POST_FRAGMENT } from '../../fragments';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -15,31 +16,10 @@ const Text = styled.Text``;
 const FEED_QUERY = gql`
   {
     seeFeed {
-      id
-      location
-      caption
-      user {
-        id
-        avatar
-        username
-      }
-      files {
-        id
-        url
-      }
-      likeCount
-      isLiked
-      comments {
-        id
-        text
-        user {
-          id
-          username
-        }
-      }
-      createdAt
+      ...PostParts
     }
   }
+  ${POST_FRAGMENT}
 `;
 
 function Home() {

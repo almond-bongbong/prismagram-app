@@ -9,7 +9,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MessagesLink from '../components/layouts/MessagesLink';
 import NavIcon from './NavIcon';
 import { stackStyles } from './config';
-import SearchBar from '../components/common/SearchBar';
+import Detail from '../screens/Tabs/Detail';
+import styles from '../styles';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -27,6 +28,15 @@ const stackFactory = ({ route }) => {
         name={route.name}
         component={InitialRoute}
         options={customConfig}
+      />
+      <Stack.Screen
+        name="Detail"
+        component={Detail}
+        options={{
+          headerTitle: 'Photo',
+          headerTintColor: styles.blackColor,
+          headerBackTitle: ' ',
+        }}
       />
     </Stack.Navigator>
   );

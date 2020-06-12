@@ -12,6 +12,8 @@ function SearchBar({ value, onChange, onSubmit }) {
       returnKeyType="search"
       placeholder="Search"
       placeholderTextColor={styles.darkGreyColor}
+      onSubmitEditing={onSubmit}
+      autoCorrect={false}
       style={{
         width: constants.width - 40,
         height: 35,
