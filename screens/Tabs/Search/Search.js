@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import SearchBar from '../../components/common/SearchBar';
+import SearchBar from '../../../components/common/SearchBar';
 import { useQuery } from 'react-apollo-hooks';
 import { SEARCH } from './SearchQueries';
 import { RefreshControl } from 'react-native';
-import Loader from '../../components/common/Loader';
-import SquarePhoto from '../../components/post/SquarePhoto';
+import Loader from '../../../components/common/Loader';
+import SquarePhoto from '../../../components/post/SquarePhoto';
 
 const Container = styled.ScrollView`
   background-color: #fff;
@@ -54,27 +54,25 @@ function Search({ navigation }) {
   };
 
   const handlePress = (id) => {
-    navigation.navigate('Detail', { id })
-  }
+    navigation.navigate('Detail', { id });
+  };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <Container
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={refresh} />
       }
     >
-      {loading ? (
-        <Loader />
-      ) : (
-        data?.searchPost.map((post) => (
-          <SquarePhoto
-            key={post.id}
-            id={post.id}
-            files={post.files}
-            onPress={handlePress}
-          />
-        ))
-      )}
+      {data?.searchPost.map((post) => (
+        <SquarePhoto
+          key={post.id}
+          id={post.id}
+          files={post.files}
+          onPress={handlePress}
+        />
+      ))}
     </Container>
   );
 }

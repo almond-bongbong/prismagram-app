@@ -24,27 +24,24 @@ const POST_DETAIL = gql`
 function Detail({ route }) {
   const { loading, data } = useQuery(POST_DETAIL, {
     variables: { id: route.params.id },
+    fetchPolicy: 'network-only',
   });
   const post = data?.seeFullPost;
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <Container>
-      {loading ? (
-        <Loader />
-      ) : (
-        post && (
-          <Post
-            id={post.id}
-            user={post.user}
-            likeCount={post.likeCount}
-            isLiked={post.isLiked}
-            caption={post.caption}
-            files={post.files}
-            comments={post.comments}
-            createdAt={post.createdAt}
-          />
-        )
-      )}
+      <Post
+        id={post.id}
+        user={post.user}
+        likeCount={post.likeCount}
+        isLiked={post.isLiked}
+        caption={post.caption}
+        files={post.files}
+        comments={post.comments}
+        createdAt={post.createdAt}
+      />
     </Container>
   );
 }

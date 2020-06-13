@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
-import { RefreshControl, ScrollView } from 'react-native';
+import { RefreshControl } from 'react-native';
 import { useQuery } from 'react-apollo-hooks';
 import Loader from '../../components/common/Loader';
 import Post from '../../components/post/Post';
@@ -37,17 +37,17 @@ function Home() {
     }
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <Container
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={refresh} />
       }
     >
-      {loading ? (
-        <Loader />
-      ) : (
-        data?.seeFeed?.map((post) => <Post key={post.id} {...post} />)
-      )}
+      {data?.seeFeed?.map((post) => (
+        <Post key={post.id} {...post} />
+      ))}
     </Container>
   );
 }
