@@ -5,14 +5,30 @@ import SelectPhoto from '../screens/Photo/SelectPhoto';
 import TakePhoto from '../screens/Photo/TakePhoto';
 import UploadPhoto from '../screens/Photo/UploadPhoto';
 import { stackStyles } from './config';
+import styles from '../styles';
 
 const PhotoTab = createMaterialTopTabNavigator();
 
 function PhotoNavigation() {
   return (
-    <PhotoTab.Navigator tabBarPosition="bottom">
-      <PhotoTab.Screen name="SelectPhoto" component={SelectPhoto} />
-      <PhotoTab.Screen name="TakePhoto" component={TakePhoto} />
+    <PhotoTab.Navigator
+      tabBarPosition="bottom"
+      tabBarOptions={{
+        indicatorStyle: { backgroundColor: styles.blackColor },
+        labelStyle: { color: styles.blackColor, fontWeight: '600' },
+        style: { ...stackStyles },
+      }}
+    >
+      <PhotoTab.Screen
+        name="SelectPhoto"
+        options={{ tabBarLabel: 'Select' }}
+        component={SelectPhoto}
+      />
+      <PhotoTab.Screen
+        name="TakePhoto"
+        options={{ tabBarLabel: 'Take' }}
+        component={TakePhoto}
+      />
     </PhotoTab.Navigator>
   );
 }
@@ -23,18 +39,17 @@ export default function () {
     <PhotoStack.Navigator
       screenOptions={{
         headerStyle: { ...stackStyles },
+        headerTitle: '',
       }}
     >
       <PhotoStack.Screen
         name="PhotoNavigation"
-        options={{ title: '' }}
         component={PhotoNavigation}
+        options={{
+          headerShown: false,
+        }}
       />
-      <PhotoStack.Screen
-        name="UploadPhoto"
-        options={{ title: '' }}
-        component={UploadPhoto}
-      />
+      <PhotoStack.Screen name="UploadPhoto" component={UploadPhoto} />
     </PhotoStack.Navigator>
   );
 }

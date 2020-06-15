@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Platform, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
@@ -69,7 +69,7 @@ function UserProfile({
   const avatarSource = avatar ? { uri: avatar } : defaultAvatar;
 
   return (
-    <View>
+    <ScrollView>
       <ProfileHeader>
         <Image
           style={{ height: 80, width: 80, borderRadius: 40 }}
@@ -128,7 +128,7 @@ function UserProfile({
           <Post key={p.id} {...p} />
         )
       )}
-    </View>
+    </ScrollView>
   );
 }
 
