@@ -53,10 +53,6 @@ function Search({ navigation }) {
     }
   };
 
-  const handlePress = (id) => {
-    navigation.navigate('Detail', { id });
-  };
-
   return loading ? (
     <Loader />
   ) : (
@@ -66,12 +62,7 @@ function Search({ navigation }) {
       }
     >
       {data?.searchPost.map((post) => (
-        <SquarePhoto
-          key={post.id}
-          id={post.id}
-          files={post.files}
-          onPress={handlePress}
-        />
+        <SquarePhoto key={post.id} id={post.id} files={post.files} />
       ))}
     </Container>
   );

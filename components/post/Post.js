@@ -8,6 +8,7 @@ import { gql } from 'apollo-boost';
 import styles from '../../styles';
 import constants from '../../constants';
 import { useMutation } from 'react-apollo-hooks';
+import { useNavigation } from '@react-navigation/native';
 
 const Container = styled.View``;
 
@@ -71,6 +72,7 @@ const Post = ({
   comments = [],
   isLiked,
 }) => {
+  const navigation = useNavigation();
   const defaultAvatar = require('../../assets/default-avatar.jpg');
   const avatarSource = user.avatar ? { uri: user.avatar } : defaultAvatar;
   const swiperHeight = constants.height / 2.5;
@@ -94,6 +96,10 @@ const Post = ({
     }
   };
 
+  const handleUserProfile = () => {
+    navigation.navigate('UserDetail', { username: user.username });
+  };
+
   useEffect(() => {
     if (isDidMount.current) {
       setLocalLikeCount((p) => (localIsLiked ? p + 1 : p - 1));
@@ -104,13 +110,13 @@ const Post = ({
   return (
     <Container>
       <Header>
-        <Touchable>
+        <Touchable onPress={handleUserProfile}>
           <Image
             style={{ height: 40, width: 40, borderRadius: 20 }}
             source={avatarSource}
           />
         </Touchable>
-        <Touchable>
+        <Touchable onPress={handleUserProfile}>
           <HeaderUserContainer>
             <Bold>{user.username}</Bold>
             <Location>{location}</Location>

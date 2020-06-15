@@ -1,14 +1,140 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Image, Platform, TouchableOpacity, View } from 'react-native';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import styles from '../../styles';
+import constants from '../../constants';
+import SquarePhoto from '../post/SquarePhoto';
+import Post from '../post/Post';
 
-function UserProfile(props) {
-  return <Text>Hello</Text>;
+const defaultAvatar = require('../../assets/default-avatar.jpg');
+
+const ProfileHeader = styled.View`
+  padding: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderColumn = styled.View``;
+
+const ProfileStats = styled.View`
+  flex-direction: row;
+`;
+
+const Stat = styled.View`
+  align-items: center;
+  margin-left: 40px;
+`;
+
+const Bold = styled.Text`
+  font-weight: 600;
+`;
+
+const StatName = styled.Text`
+  margin-top: 5px;
+  font-size: 12px;
+  color: ${styles.darkGreyColor};
+`;
+
+const ProfileMeta = styled.View`
+  margin-top: 10px;
+  padding-horizontal: 20px;
+`;
+
+const Bio = styled.Text``;
+
+const ButtonContainer = styled.View`
+  flex-direction: row;
+  margin-top: 30px;
+`;
+
+const Button = styled.View`
+  width: ${constants.width / 2}px;
+  align-items: center;
+`;
+
+function UserProfile({
+  avatar,
+  posts,
+  postsCount,
+  followersCount,
+  followingCount,
+  bio,
+  fullName,
+}) {
+  const [isGrid, setIsGrid] = useState(true);
+  const defaultAvatar = require('../../assets/default-avatar.jpg');
+  const avatarSource = avatar ? { uri: avatar } : defaultAvatar;
+
+  return (
+    <View>
+      <ProfileHeader>
+        <Image
+          style={{ height: 80, width: 80, borderRadius: 40 }}
+          source={avatarSource}
+        />
+        <HeaderColumn>
+          <ProfileStats>
+            <Stat>
+              <Bold>{postsCount}</Bold>
+              <StatName>Posts</StatName>
+            </Stat>
+            <Stat>
+              <Bold>{followersCount}</Bold>
+              <StatName>Followers</StatName>
+            </Stat>
+            <Stat>
+              <Bold>{followingCount}</Bold>
+              <StatName>Following</StatName>
+            </Stat>
+          </ProfileStats>
+        </HeaderColumn>
+      </ProfileHeader>
+      <ProfileMeta>
+        <Bold>{fullName}</Bold>
+        <Bio>{bio}</Bio>
+      </ProfileMeta>
+      <ButtonContainer>
+        <TouchableOpacity onPress={() => setIsGrid(true)}>
+          <Button>
+            <Ionicons
+              color={isGrid ? styles.blackColor : styles.darkGreyColor}
+              size={32}
+              name={Platform.OS === 'ios' ? 'ios-grid' : 'md-grid'}
+            />
+          </Button>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsGrid(false)}>
+          <Button>
+            <Ionicons
+              color={!isGrid ? styles.blackColor : styles.darkGreyColor}
+              size={32}
+              name={Platform.OS === 'ios' ? 'ios-list' : 'md-list'}
+            />
+          </Button>
+        </TouchableOpacity>
+      </ButtonContainer>
+      {posts?.map((p) =>
+        isGrid ? (
+          <SquarePhoto
+            key={p.id}
+            id={p.id}
+            files={p.files}
+            onPress={(_) => _}
+          />
+        ) : (
+          <Post key={p.id} {...p} />
+        )
+      )}
+    </View>
+  );
 }
 
 UserProfile.propTypes = {
   id: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
   username: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isFollowing: PropTypes.bool.isRequired,
@@ -52,6 +178,7 @@ UserProfile.propTypes = {
 
 UserProfile.defaultProps = {
   posts: [],
+  avatar: defaultAvatar,
 };
 
 export default UserProfile;
