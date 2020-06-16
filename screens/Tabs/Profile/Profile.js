@@ -34,8 +34,6 @@ function Profile({ navigation }) {
     }
   }, [data?.seeMyProfile]);
 
-  console.log(data?.seeMyProfile);
-
   return loading ? (
     <Loader />
   ) : (

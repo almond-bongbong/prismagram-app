@@ -20,14 +20,14 @@ function PhotoNavigation() {
       }}
     >
       <PhotoTab.Screen
-        name="SelectPhoto"
-        options={{ tabBarLabel: 'Select' }}
-        component={SelectPhoto}
-      />
-      <PhotoTab.Screen
         name="TakePhoto"
         options={{ tabBarLabel: 'Take' }}
         component={TakePhoto}
+      />
+      <PhotoTab.Screen
+        name="SelectPhoto"
+        options={{ tabBarLabel: 'Select' }}
+        component={SelectPhoto}
       />
     </PhotoTab.Navigator>
   );
@@ -46,7 +46,7 @@ export default function () {
         name="PhotoNavigation"
         component={PhotoNavigation}
         options={{
-          headerShown: false,
+          headerTitle: 'Choose Photo',
         }}
       />
       <PhotoStack.Screen name="UploadPhoto" component={UploadPhoto} />
