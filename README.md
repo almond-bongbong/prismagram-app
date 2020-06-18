@@ -5,8 +5,8 @@ Screens:
 - [x] Search
 - [ ] Upload
 - [ ] Notifications
-- [ ] Profile
+- [x] Profile
 - [ ] Edit Profile
-- [ ] Photo Detail
+- [x] Photo Detail
 - [ ] Photo Comments
-- [ ] Photo Likes
+- [x] Photo Likes
