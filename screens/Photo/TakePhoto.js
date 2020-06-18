@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { TouchableOpacity } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import Loader from '../../components/common/Loader';
+import { Camera } from 'expo-camera';
+import constants from '../../constants';
+import { TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import styles from '../../styles';
 
-const View = styled.View`
+const Container = styled.View`
   flex: 1;
   background-color: #fff;
 `;
 
-const Text = styled.Text``;
-
 function TakePhoto({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [hasPermissions, setHasPermissions] = useState(false);
+  const [cameraType, setCameraType] = useState(Camera.Constants.Type.front);
 
   const askPermission = async () => {
     try {
@@ -32,14 +35,39 @@ function TakePhoto({ navigation }) {
     askPermission();
   }, []);
 
+  const toggleCameraType = () => {
+    const { back, front } = Camera.Constants.Type;
+    setCameraType((prev) => (prev === front ? back : front));
+  };
+
   return loading ? (
     <Loader />
   ) : (
-    <View>
-      <TouchableOpacity onPress={() => navigation.navigate('UploadPhoto')}>
-        <Text>Take</Text>
-      </TouchableOpacity>
-    </View>
+    <Container>
+      {hasPermissions && (
+        <Camera
+          type={cameraType}
+          style={{
+            justifyContent: 'flex-end',
+            padding: 15,
+            width: constants.width,
+            height: constants.height / 2,
+          }}
+        >
+          <TouchableOpacity onPress={toggleCameraType}>
+            <Ionicons
+              name={
+                Platform.OS === 'ios'
+                  ? 'ios-reverse-camera'
+                  : 'md-reverse-camera'
+              }
+              size={28}
+              color={styles.lightGreyColor}
+            />
+          </TouchableOpacity>
+        </Camera>
+      )}
+    </Container>
   );
 }
 
