@@ -11,7 +11,7 @@ function NavController() {
   return (
     <NavigationContainer>
       <View style={{ flex: '1' }}>
-        {!isLoggedIn ? <MainNavigation /> : <AuthNavigation />}
+        {isLoggedIn ? <MainNavigation /> : <AuthNavigation />}
       </View>
     </NavigationContainer>
   );

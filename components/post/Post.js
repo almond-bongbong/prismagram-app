@@ -128,7 +128,7 @@ const Post = ({
           <Image
             key={f.id}
             style={{ width: constants.width, height: swiperHeight }}
-            source={{ uri: f.url }}
+            source={{ uri: f.url || constants.noImageUrl }}
           />
         ))}
       </Swiper>

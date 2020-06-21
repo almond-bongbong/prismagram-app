@@ -55,7 +55,7 @@ function TabNavigation() {
   const isIOS = Platform.OS === 'ios';
   return (
     <Tab.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Home"
       tabBarOptions={{
         showLabel: false,
         style: {

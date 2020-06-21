@@ -27,13 +27,12 @@ const Button = styled.View`
   border: 10px solid ${styles.lightGreyColor};
 `;
 
-function TakePhoto() {
+function TakePhoto({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [hasPermissions, setHasPermissions] = useState(false);
   const [canTakePhoto, setCanTakePhoto] = useState(true);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.front);
   const cameraRef = useRef(null);
-  const [photo, setPhoto] = useState(null);
 
   const askPermission = async () => {
     try {
@@ -66,8 +65,10 @@ function TakePhoto() {
         exif: true,
       });
       const asset = await MediaLibrary.createAssetAsync(photo.uri);
-      console.log(asset);
+      navigation.navigate('UploadPhoto', { photo: asset });
     } catch (e) {
+      console.log(e);
+    } finally {
       setCanTakePhoto(true);
     }
   };

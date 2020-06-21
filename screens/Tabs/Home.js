@@ -13,7 +13,7 @@ const Container = styled.ScrollView`
 
 const Text = styled.Text``;
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
   {
     seeFeed {
       ...PostParts

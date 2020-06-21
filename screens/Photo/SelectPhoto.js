@@ -5,15 +5,31 @@ import * as Permissions from 'expo-permissions';
 import * as MediaLibrary from 'expo-media-library';
 import Loader from '../../components/common/Loader';
 import constants from '../../constants';
+import styles from '../../styles';
 
 const View = styled.View`
   flex: 1;
   background-color: #fff;
 `;
 
-const Text = styled.Text``;
+const Button = styled.TouchableOpacity`
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  right: 5px;
+  top: 15px;
+  background-color: ${styles.blueColor};
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+`;
 
-function SelectPhoto() {
+const Text = styled.Text`
+  color: white;
+  font-weight: 600;
+`;
+
+function SelectPhoto({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [hasPermissions, setHasPermissions] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -57,6 +73,10 @@ function SelectPhoto() {
     }
   }, [hasPermissions]);
 
+  const handleSelectPhoto = () => {
+    navigation.navigate('UploadPhoto', { photo: selectedPhoto });
+  };
+
   return loading ? (
     <Loader />
   ) : (
@@ -67,6 +87,9 @@ function SelectPhoto() {
             style={{ width: constants.width, height: constants.height / 2 }}
             source={{ uri: selectedPhoto.uri }}
           />
+          <Button onPress={handleSelectPhoto}>
+            <Text>Select Photo</Text>
+          </Button>
           <ScrollView
             style={{ height: constants.height }}
             contentContainerStyle={{ flexWrap: 'wrap', flexDirection: 'row' }}

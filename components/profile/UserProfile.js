@@ -55,6 +55,12 @@ const Button = styled.View`
   align-items: center;
 `;
 
+const PostContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 function UserProfile({
   avatar,
   posts,
@@ -116,18 +122,20 @@ function UserProfile({
           </Button>
         </TouchableOpacity>
       </ButtonContainer>
-      {posts?.map((p) =>
-        isGrid ? (
-          <SquarePhoto
-            key={p.id}
-            id={p.id}
-            files={p.files}
-            onPress={(_) => _}
-          />
-        ) : (
-          <Post key={p.id} {...p} />
-        )
-      )}
+      <PostContainer>
+        {posts?.map((p) =>
+          isGrid ? (
+            <SquarePhoto
+              key={p.id}
+              id={p.id}
+              files={p.files}
+              onPress={(_) => _}
+            />
+          ) : (
+            <Post key={p.id} {...p} />
+          )
+        )}
+      </PostContainer>
     </ScrollView>
   );
 }

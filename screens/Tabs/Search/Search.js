@@ -11,7 +11,11 @@ const Container = styled.ScrollView`
   background-color: #fff;
 `;
 
-const Text = styled.Text``;
+const PostContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
 
 function Search({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
@@ -61,9 +65,11 @@ function Search({ navigation }) {
         <RefreshControl refreshing={refreshing} onRefresh={refresh} />
       }
     >
-      {data?.searchPost.map((post) => (
-        <SquarePhoto key={post.id} id={post.id} files={post.files} />
-      ))}
+      <PostContainer>
+        {data?.searchPost.map((post) => (
+          <SquarePhoto key={post.id} id={post.id} files={post.files} />
+        ))}
+      </PostContainer>
     </Container>
   );
 }

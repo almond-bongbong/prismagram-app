@@ -40,6 +40,8 @@ export default function () {
       screenOptions={{
         headerStyle: { ...stackStyles },
         headerTitle: '',
+        headerTintColor: styles.blackColor,
+        headerBackTitleVisible: false,
       }}
     >
       <PhotoStack.Screen
@@ -49,7 +51,13 @@ export default function () {
           headerTitle: 'Choose Photo',
         }}
       />
-      <PhotoStack.Screen name="UploadPhoto" component={UploadPhoto} />
+      <PhotoStack.Screen
+        name="UploadPhoto"
+        component={UploadPhoto}
+        options={{
+          headerTitle: 'Upload',
+        }}
+      />
     </PhotoStack.Navigator>
   );
 }

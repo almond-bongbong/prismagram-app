@@ -14,7 +14,7 @@ function SquarePhoto({ id, files = [], onPress }) {
   return (
     <TouchableOpacity onPress={handlePress}>
       <Image
-        source={{ uri: files[0].url }}
+        source={{ uri: files[0].url || constants.noImageUrl }}
         style={{ width: constants.width / 3, height: constants.width / 3 }}
       />
     </TouchableOpacity>
